@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     # 'api',
     # 'APIs',
     # 'siafapp',
-    'corsheaders'
+    'corsheaders',
+    'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +56,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -135,6 +139,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 #     BASE_DIR / 'frontend/dist/assets',
 # #     BASE_DIR / 'assets'
 # ]
+STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 # Default primary key field type
