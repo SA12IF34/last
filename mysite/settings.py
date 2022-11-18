@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     # 'APIs',
     # 'siafapp',
     'corsheaders',
-    'django.contrib.staticfiles',
     'whitenoise.runserver_nostatic',
 ]
 
