@@ -5,3 +5,4 @@ psycopg2==2.8.6
 sqlparse==0.4.2
 djangorestframework
 django-cors-headers
+whitenoise
