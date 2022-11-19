@@ -86,6 +86,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
+CSRF_TRUSTED_ORIGINS = ['https://saifchan.site', 'https://saifchan.up.railway.app', 'https://saifblog.onrender.com']
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
