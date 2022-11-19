@@ -1,0 +1,489 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+:root {
+  --loadc: rgba(0, 94, 255, 0.9);
+}
+ 
+.Header {
+  width: 100%;
+  min-height: 18vh;
+  border-bottom: 5px solid deepskyblue;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+.Header h1 {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.Search {
+  width: 40%;
+  height: 40px;
+  position: relative;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 3px solid deepskyblue;
+  margin: 15px;
+}
+
+.Search input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  border: none;
+  border-radius: 999px;
+  outline: none;
+  padding-left: 20px;
+  padding-right: 56px;
+  color: white;
+  font-size: 17px;
+}
+
+.Search button {
+  width: 56px;
+  height: 100%;
+  background-color: black;
+  position: absolute;
+  right: 0%;
+  cursor: pointer;
+  border: none;
+}
+
+.Search button i {
+  color: deepskyblue;
+  background-color: transparent;
+  font-size: 20px;
+}
+
+.SecondHeader {
+  width: 100%;
+  height: 50px;
+  border-bottom: 3px solid deepskyblue;
+  padding: 5px;
+}
+
+.SecondHeader>div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.SecondHeader ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+.SecondHeader ul li {
+  margin: 15px;
+  cursor: pointer;
+}
+.SecondHeader a {
+  color: white;
+  transition: 0.3s;
+}
+
+.SecondHeader a:hover {
+  color: gold;
+}
+
+.SecondHeader i {
+  font-size: 26px;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+}
+ 
+.SecondHeader div a {
+  margin: 12px;
+}
+
+.Post {
+  width: 100%;
+  height: max-content;
+  
+}
+
+.Post header {
+  width: 100%;
+  height: 12vh;
+  border-bottom: 3px solid deepskyblue;
+  position: relative;
+}
+
+.Write {
+  width: 100%;
+  min-height: 80vh;
+  position: relative;
+  padding: 20px;
+}
+
+.Write hr {
+  width: 100%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  border-color: gray;
+}
+
+.w {
+  width: 100%;
+  height: max-content;
+  background-color: black;
+  position: relative;
+  
+}
+
+.title {
+  margin-bottom: 20px;
+}
+.title input {
+  font-size: 35px;
+}
+
+button {
+  color: white;
+  border: 1px solid white;
+  background-color: transparent;
+  padding: 7px;
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+}
+
+.addSubheading {
+  bottom: 5px;
+  left: 15px;
+}
+
+.subheading {
+  margin-top: 20px;
+}
+.subheading input {
+  font-size: 30px;
+}
+.w,
+.w input {
+  width: 100%;
+  height: 50px;
+  font-size: 22px;
+  background-color: transparent;
+  padding-left: 20px;
+  color: white;
+  border: none;
+  outline: none;
+}
+.subheading input,
+input[type=text] {
+  background-color: transparent;
+  padding-left: 20px;
+  color: white;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.focused {
+  border-bottom: 1px solid gray !important;
+}
+
+.finish {
+  background-image: none !important;
+  border: none !important;
+  height: 40px !important;
+  margin-left: 20px;
+}
+
+#inputLabel {
+  border: 1px solid white;
+  padding: 7px;
+  border-radius: 7px;
+  position: relative;
+  bottom: 4px;
+  left: 5px;
+  cursor: pointer;
+}
+
+#imgInput {
+  position: absolute;
+  display: none;
+}
+
+.imgchan {
+  width: 350px;
+  height: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 4;
+}
+
+.Btn {
+  width: 30px; 
+  height: 30px; 
+  background-color: gray; 
+  color: white; 
+  z-index: 14; 
+  position: absolute; 
+  top: 0%; 
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+#counter {
+  display: none;
+}
+
+.Submit {
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+  margin-top: 50px;
+}
+
+.loadState {
+  opacity: 0.3;
+  filter: blur(1px);
+}
+
+.Load {
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  transform-style: preserve-3d;
+  perspective: 600px;
+  animation: load 0.8s ease-in-out infinite;
+}
+
+.Load span {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  background-color: var(--loadc);
+}
+
+.load1 {
+  transform: translateZ(100px);
+}
+
+.load2 {
+  transform: translateZ(-100px);
+}
+
+.articles {
+  width: 100%;
+  height: 150px;
+  border-bottom: 2px solid gray;
+  padding: 20px;
+}
+
+.Article {
+  padding: 20px;
+}
+.Article h1 {
+  font-size: 45px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+.Ultra h2 {
+  margin-left: -5px;
+}
+
+.Ultra h2 {
+  font-size: 32px;
+  margin-bottom: 35px !important;
+  margin-top: 35px !important;
+}
+
+.Ultra p, .Ultra h2 {
+  width: fit-content;
+  height: max-content !important;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+
+}
+
+.Ultra p {
+  margin: 10px;
+  margin-bottom: 15px;
+}
+
+.Ultra div {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  margin-left: 15px;
+}
+
+
+.LogIn, .SignUp {
+  padding: 20px;
+}
+
+.AccountForm label {
+  font-size: large;
+}
+
+.AccountForm input {
+  background-color: transparent;
+  width: 240px;
+  height: 36px;
+  margin-top: 28px;
+  margin-bottom: 25px;
+  margin-left: 5px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid gray;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+  background-image: linear-gradient(to right, rgba(128, 128, 128, 0.2), transparent 45%);
+}
+
+.AccountForm input[type=submit] {
+  cursor: pointer;
+  background-image: linear-gradient(to right,rgba(128,128,128,.2), transparent 40%), 
+                    linear-gradient(to left, rgba(128,128,128,.2), transparent 40%) !important;
+}
+
+.AccountForm textarea {
+  width: 400px;
+  height: 180px;
+  margin-top: 28px;
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+  font-family: arial;
+  font-size: large;
+}
+
+.Profile {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  position: absolute;
+  width: 100%;
+  height: -webkit-fill-available;
+  height: -moz-fill-available;
+  height: -ms-fill-available;
+  height: -o-fill-available; 
+}
+
+.Profile div {
+  width: max-content;
+  height: max-content;
+  margin: 22px;
+}
+
+.UserData h2 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.UserData div {
+  border: 3px solid white;
+  min-width: 300px;
+  min-height: 260px;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.UserArticles h2 {
+  margin-top: 30px;
+}
+.UserArticles div {
+  margin-top: 35px;
+  border: 2px solid white;
+  padding: 15px;
+  border-radius: 15px;
+  width: 250px;
+  height: 320px;
+  overflow-y: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 3px;
+}
+.scroll::-webkit-scrollbar-track {
+  background-color: black;
+}
+.scroll::-webkit-scrollbar-thumb {
+  background-color: rgb(135, 135, 135);
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .Search {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .Article {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-basis: content;
+  }
+
+  .Ultra {
+    padding: 0;
+  }
+  .Ultra h2 {
+    margin: 0;
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+  .Ultra div {
+    width: 90% !important;
+  }
+  .Ultra div img {
+    width: 100%;
+  }
+}
+
+@keyframes load {
+  from {
+    rotate: y 0deg;
+  }
+  to {
+    rotate: y 360deg;
+  }
+}
+
