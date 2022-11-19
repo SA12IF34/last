@@ -38,15 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-<<<<<<< Updated upstream
-    # 'api',
-    # 'APIs',
-    # 'siafapp',
-=======
     'api',
     'APIs',
     'saifapp',
->>>>>>> Stashed changes
     'corsheaders',
     'whitenoise.runserver_nostatic',
 ]
@@ -140,16 +134,9 @@ USE_TZ = True
 
 STATIC_URL = '/assets/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
-<<<<<<< Updated upstream
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'frontend/dist/assets',
-# #     BASE_DIR / 'assets'
-# ]
+
 STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-=======
-STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
->>>>>>> Stashed changes
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
