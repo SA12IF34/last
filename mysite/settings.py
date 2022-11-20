@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 CORS_ORIGIN_WHITELIST=['http://127.0.0.1:5173', 'https://saifblog.onrender.com']
-CORS_ALLOW_HEADERS = ("x-requested-with", "content-type", "accept", "origin", "authorization", "x-csrftoken")
+
 # Application definition
 
 INSTALLED_APPS = [
