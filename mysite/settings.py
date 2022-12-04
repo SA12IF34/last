@@ -169,11 +169,15 @@ USE_TZ = True
 
 STATIC_URL = '/assets/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+<<<<<<< HEAD
 STATICFILES_DIRS = [
     BASE_DIR / 'frontend/shit/dist/assets',
     BASE_DIR / 'frontend/vite/dist/assets'
 ]
 #STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
+=======
+STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
+>>>>>>> 935cc30dad826581658db57e44d54d061c66eebf
 
 
 # Default primary key field type
