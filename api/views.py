@@ -3,126 +3,11 @@ from django.contrib.auth.decorators import login_required
 from rest_framework.decorators import api_view
 from django.contrib.auth import login, logout
 from rest_framework.status import *
+from django.shortcuts import redirect
 from .models import *
 from .serializers import *
+import stripe
 
-
-@api_view(['GET', 'POST'])
-def posts(request):
-
-    if request.method == 'GET':
-        all_posts = Posts.objects.all()
-        serializer = PostsSerializer(instance=all_posts, many=True)
-
-        return Response(data=serializer.data, status=HTTP_200_OK)
-
-    if request.method == 'POST':
-        serializer = PostsSerializer(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(data=serializer.data, status=HTTP_201_CREATED)
-        
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
-
-    
-
-    
-@api_view(['GET', 'PUT', 'DELETE'])
-def get_post(request, pk):
-
-    try:
-        post = Posts.objects.get(id=pk)
-    except Posts.DoesNotExist:
-        return Response(status=HTTP_404_NOT_FOUND)
-    
-    if request.method == "GET":
-        serializer = PostsSerializer(post)
-
-        return Response(data=serializer.data)
-
-    if request.method == 'PUT':
-        
-        new_post = request.data
-        
-        serializer = PostsSerializer(post, data=new_post)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(data=serializer.data, status=HTTP_200_OK)
-        
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
-
-
-    if request.method == 'DELETE':
-        post.delete()
-
-        return Response(status=HTTP_204_NO_CONTENT) 
-
-
-@api_view(['GET', 'POST'])
-def sicks(request):
-    if request.method == 'GET':
-        all_sicks = Sick.objects.all()
-        serializer = SicksSerializer(instance=all_sicks, many=True)
-
-        return Response(data=serializer.data, status=HTTP_200_OK)
-    
-    if request.method == 'POST':
-        data = request.data
-        serializer = SicksSerializer(data=data)
-
-        if serializer.is_valid():
-            serializer.save()
-
-            return Response(data=serializer.data, status=HTTP_201_CREATED)
-        
-        return Response(data={"shit": "shit"})
-
-         
-
-@api_view(['GET', 'POST'])
-def doctors(request):
-    
-    if request.method == 'GET':
-        doctors = Doctor.objects.all()
-        serialize = DoctorsSerializer(instance=doctors, many=True)
-
-        return Response(data=serialize.data, status=HTTP_200_OK)
-
-    if request.method == 'POST':
-        serialize = DoctorsSerializer(data=request.data)
-
-        if serialize.is_valid():
-            serialize.save()
-
-            return Response(data=serialize.data, status=HTTP_201_CREATED)
-
-        return Response(serialize.errors)
-
-
-@api_view(['GET'])
-def doctor(request, name):
-    try:
-        doctor = Doctor.objects.get(name=name)
-        serialize = DoctorsSerializer(instance=doctor)
-    except Doctor.DoesNotExist:
-        return Response(status=HTTP_404_NOT_FOUND)
-    
-
-    return Response(data=serialize.data)
-
-
-@api_view(['GET'])
-def aSickInTheRoom(request, num):
-    
-    try:
-        sickchan = Sick.objects.get(room_number=num)
-        serializer = SicksSerializer(instance=sickchan)
-    except Sick.DoesNotExist:
-        return Response(status=HTTP_204_NO_CONTENT)
-    
-
-    return Response(data=serializer.data)
 
 
 @api_view(['POST'])
@@ -139,10 +24,13 @@ def add_user(request):
             if user is not None:
                 login(request, user)
 
-            return Response(data={"auth": True}, status=HTTP_201_CREATED)
+            user2 = User.objects.get(username=request.data['username'])
+            serializer2 = UsersSerializer(instance=user2)
+            
+            return Response(data=serializer2.data, status=HTTP_201_CREATED)
         
         return Response(serializer.errors)
- 
+
 
 
 @api_view(['POST'])
@@ -152,16 +40,19 @@ def logIn(request):
         
         try:
             serializer = LoginSerializer()
-        
+         
             
             user = serializer.create(request.data)
             if user:
                 login(request, user)
 
-                return Response(data={"auth": True}, status=HTTP_200_OK)
+                user2 = User.objects.get(username=request.data['username'])
+                serializer2 = UsersSerializer(instance=user2)
+                print("good")
+                return Response(data=serializer2.data, status=HTTP_200_OK)
 
             else:
-
+                print("not good")
                 return Response(data={"shit": "this shit is not found"})
         except :
             return Response({"good": False})
@@ -196,8 +87,8 @@ def getUser(request, pk):
 
     return Response(data=serializer.data)
 
-@login_required(login_url="/projects/books-shop/sign-up/")
-@api_view(['GET', 'POST'])
+
+@api_view(['POST'])
 def addtocart(request):
     
     if request.method == 'POST':
@@ -211,6 +102,15 @@ def addtocart(request):
             return Response({"error": "something happend"})
     
     return Response(data={"shit": "shit"})
+
+
+@api_view(['GET'])
+def getFromCart(request, user):
+    
+    books = Cart.objects.filter(owner=user)
+    serializer = BooksSerializer(instance=books, many=True)
+
+    return Response(data=serializer.data, status=HTTP_200_OK)
 
 
 @api_view(['GET'])
@@ -270,3 +170,34 @@ def addtoboughts(request):
         data = serializer.create(data=request.data)
 
         return Response(data=data, status=HTTP_201_CREATED)
+
+#-----------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------
+
+stripe.api_key = 'sk_test_51MA63vE7D45S4zL6PyiB2XnKmSOBsO5tobb0gjFzENwTqjna6tlpBqo3SsLgCVF4VxY4kkShyDxZeh6DHtrqcml400Kl7WmTwe'
+
+DOMAIN1 = 'http://127.0.0.1:8000/ecommerce-project/success'
+DOMAIN2 = 'http://127.0.0.1:8000/ecommerce-project'
+
+@api_view(['POST'])
+def checkout_session(request):
+    try:
+        checkout_session = stripe.checkout.Session.create(
+            line_items=[
+                {
+                    'price': 'price_1MARjrE7D45S4zL6OyBj1Whv',
+                    'quantity': 1
+                }
+            ],
+            mode='payment',
+            success_url=DOMAIN1+'?',
+            cancel_url=DOMAIN2+'?canceled=true',
+        )
+    except Exception as e:
+        print(e.args)
+        return Response(exception=e)
+    print(checkout_session.url)
+    return redirect(checkout_session.url, code=303)
+ 

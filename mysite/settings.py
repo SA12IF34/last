@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-rc^*w^w&6g9_(uvx#6s*bnt!w)l0rdi%!l7mv#y%uc&x%wo5pk
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-CORS_ORIGIN_WHITELIST=['http://127.0.0.1:5173', 'https://saifblog.onrender.com']
+CORS_ORIGIN_WHITELIST=['http://127.0.0.1:5173', 'https://saifblog.onrender.com', 'http://localhost:3000']
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = [
     'DELETE',
@@ -50,7 +50,7 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
-CORS_ALLOWED_ORIGINS = ['https://saifblog.onrender.com', 'https://saifchan.site', 'http://127.0.0.1:5173']
+CORS_ALLOWED_ORIGINS = ['https://saifblog.onrender.com', 'https://saifchan.site', 'http://127.0.0.1:5173', 'http://localhost:3000']
 # Application definition
 
 INSTALLED_APPS = [
@@ -65,7 +65,18 @@ INSTALLED_APPS = [
     'APIs',
     'saifapp',
     'corsheaders',
-    'whitenoise.runserver_nostatic',
+    # 'whitenoise.runserver_nostatic',
+]
+
+REACT_ROUTES = [
+    'login',
+    'signup',
+    'about',
+    'cart',
+    'bought',
+    'search-:name', 
+    'book-:name',
+
 ]
 
 MIDDLEWARE = [
@@ -79,7 +90,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    # "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -109,7 +120,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-CSRF_TRUSTED_ORIGINS = ['https://saifchan.site', 'https://saifchan.up.railway.app', 'https://saifblog.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://saifchan.site', 'http://localhost:3000']
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -158,6 +169,10 @@ USE_TZ = True
 
 STATIC_URL = '/assets/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+STATICFILES_DIRS = [
+    BASE_DIR / 'frontend/shit/dist/assets',
+    BASE_DIR / 'frontend/vite/dist/assets'
+]
 #STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 

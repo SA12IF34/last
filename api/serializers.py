@@ -4,28 +4,6 @@ from rest_framework import serializers
 from .models import *
 
 
-class PostsSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Posts
-        fields = '__all__'
-
-
-class SicksSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Sick
-        fields = '__all__'
-
-
- 
-class DoctorsSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Doctor  
-        fields = '__all__'
-
-
 
 class GetUserSerializer(serializers.ModelSerializer):
 
@@ -112,7 +90,7 @@ class UsersSerializer(serializers.ModelSerializer):
 class CartSerializer(serializers.Serializer):
 
 
-
+ 
     owner = serializers.CharField(write_only=True)
     book_name = serializers.CharField(write_only=True)
     book_id = serializers.CharField(write_only=True)
