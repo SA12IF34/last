@@ -24,11 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-rc^*w^w&6g9_(uvx#6s*bnt!w)l0rdi%!l7mv#y%uc&x%wo5pk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
-CORS_ORIGIN_WHITELIST=['http://127.0.0.1:5173', 'https://saifblog.onrender.com', 'http://localhost:3000']
-CORS_ALLOW_CREDENTIALS = True
+ALLOWED_HOSTS = ['44.195.129.79', 'saifchan.site']
+# CORS_ORIGIN_WHITELIST=['44.195.129.79', 'saifchan.site']
+# CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
@@ -50,7 +50,7 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
-CORS_ALLOWED_ORIGINS = ['https://saifblog.onrender.com', 'https://saifchan.site', 'http://127.0.0.1:5173', 'http://localhost:3000']
+# CORS_ALLOWED_ORIGINS = ['https://saifblog.onrender.com', 'https://saifchan.site', 'http://127.0.0.1:5173', 'http://localhost:3000']
 # Application definition
 
 INSTALLED_APPS = [
