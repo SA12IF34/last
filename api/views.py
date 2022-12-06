@@ -178,8 +178,8 @@ def addtoboughts(request):
 
 stripe.api_key = 'sk_test_51MA63vE7D45S4zL6PyiB2XnKmSOBsO5tobb0gjFzENwTqjna6tlpBqo3SsLgCVF4VxY4kkShyDxZeh6DHtrqcml400Kl7WmTwe'
 
-DOMAIN1 = 'http://127.0.0.1:8000/ecommerce-project/success'
-DOMAIN2 = 'http://127.0.0.1:8000/ecommerce-project'
+DOMAIN1 = 'http://saifchan.site/ecommerce-project/success'
+DOMAIN2 = 'http://saifchan.site/ecommerce-project'
 
 @api_view(['POST'])
 def checkout_session(request):

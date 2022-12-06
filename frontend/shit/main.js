@@ -53,13 +53,13 @@ function loadChan(g, x=0, y=0) {
   
 }
 
-loader1.load(python.href, (g) => {loadChan(g, -20)});
+loader1.load(python.href, (g) => {loadChan(g, -5)});
 
-loader2.load(html.href, (g) => {loadChan(g, -5)});
+loader2.load(html.href, (g) => {loadChan(g, -5, 13)});
 
-loader3.load(css.href, (g) => {loadChan(g, 10)});
+loader3.load(css.href, (g) => {loadChan(g, 10, 13)});
 
-loader4.load(javaScript.href, (g) => {loadChan(g, 25)});
+loader4.load(javaScript.href, (g) => {loadChan(g, 10)});
 
 container.appendChild(renderer.domElement);
 
