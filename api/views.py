@@ -9,6 +9,7 @@ from .serializers import *
 import stripe
 
 
+PRODUCTION = False
 
 @api_view(['POST'])
 def add_user(request):
@@ -96,10 +97,10 @@ def addtocart(request):
             serializer = CartSerializer()
 
             result = serializer.create(data=request.data)
-    
+
             return Response(data=result, status=HTTP_201_CREATED)
         except:
-            return Response({"error": "something happend"})
+            return Response(data=serializer.errors)
     
     return Response(data={"shit": "shit"})
 
@@ -171,15 +172,29 @@ def addtoboughts(request):
 
         return Response(data=data, status=HTTP_201_CREATED)
 
+
+@api_view(['GET'])
+def getBoughts(request, owner):
+    
+    try:
+        books = Bought.objects.filter(owner=owner)
+        serializer = BooksSerializer(instance=books, many=True)
+        return Response(data=serializer.data, status=HTTP_200_OK)
+    except Bought.DoesNotExist :
+        return Response(status=HTTP_404_NOT_FOUND)
+    
 #-----------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------
 
 stripe.api_key = 'sk_test_51MA63vE7D45S4zL6PyiB2XnKmSOBsO5tobb0gjFzENwTqjna6tlpBqo3SsLgCVF4VxY4kkShyDxZeh6DHtrqcml400Kl7WmTwe'
-
-DOMAIN1 = 'http://saifchan.site/ecommerce-project/success'
-DOMAIN2 = 'http://saifchan.site/ecommerce-project'
+if PRODUCTION:
+    DOMAIN1 = 'https://saifchan.site/ecommerce-project/success'
+    DOMAIN2 = 'https://saifchan.site/ecommerce-project'
+else :
+    DOMAIN1 = 'http://127.0.0.1:8000/ecommerce-project/success'
+    DOMAIN2 = 'http://127.0.0.1:8000/ecommerce-project'
 
 @api_view(['POST'])
 def checkout_session(request):

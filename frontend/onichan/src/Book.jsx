@@ -2,35 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from './apis/api';
 
-const Book = ({id, title, description, checkOut, csrftoken}) => {
+const Book = ({id, checkOut, addToCart, csrftoken}) => {
 
-  const [img, setImg] = useState();
+  const [title, setTitle] = useState();
   
   useEffect(() => {
-    console.log();
+    async function getBook() {
+      const response = await api.get(`https://www.googleapis.com/books/v1/volumes/${id}?key=AIzaSyDC_qS2Su7sFIxffrkpvXJ52bFkUOoLdzQ`)
+      const data = await response.data;
+      document.querySelector(".desc").innerHTML = data.volumeInfo.description;
+      setTitle(data.volumeInfo.title);
+    }
+
+    getBook();
+
   }, [])
 
   const {name} = useParams();
-  const user  = JSON.parse(localStorage.getItem("auth")).name;
+  const user = JSON.parse(localStorage.getItem("auth"));
 
-
-  async function addToCart(title, id) {    
-
-    const response = await api.post('cart/', {owner: user, 
-                                            book_name: title, 
-                                            book_id: id}, 
-    {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'X-CSRFToken': csrftoken
-      },
-    });
-    const status = await response.status;
-    if (status === 201) {
-      alert("the book is added");
-    } 
-  }
 
   return (
     <section className='BookPage'>
@@ -40,16 +30,18 @@ const Book = ({id, title, description, checkOut, csrftoken}) => {
         <div>
           <h2>{title}</h2>
           <br />
-          <p>{description}</p>
+          <p className='desc'></p>
           <br />
-          <button onClick={() => {
+          <button onClick={() => {  
             addToCart(title, id)
-          }} className='Btn'>
+            
+            }
+          } className='Btn'>
             <h3>Add to Cart</h3>
           </button>
-          <form  action="/apis/checkoutchan/" onSubmit={(e) => {
-            
-            checkOut(title, id)
+          <form action={user ?  "/apis/checkoutchan/" : (onsubmit=(e)=>{e.preventDefault()} )} onSubmit={(e) => {
+            console.log(typeof user);
+            checkOut(title, id);
           }} method='POST'>
             <input type="hidden" name="csrfmiddlewaretoken" value={csrftoken} />
             <button  className='Btn' type="submit">

@@ -11,6 +11,7 @@ import Bought from './Bought';
 import NotFound from './NotFound';
 import Books from './Books';
 import Book from './Book';
+import BS from './BS';
 import Success from './Success';
 import './App.css';
 import api from './apis/api';
@@ -56,7 +57,7 @@ function App() {
   async function handleSearch(input) {
     try {
       
-      const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${input}&maxResults=30&startIndex=31&key=AIzaSyDC_qS2Su7sFIxffrkpvXJ52bFkUOoLdzQ`);
+      const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${input}&maxResults=33&key=AIzaSyDC_qS2Su7sFIxffrkpvXJ52bFkUOoLdzQ`);
       setBooks(response.data.items);
       navigator(`/ecommerce-project/search-${input}/`)
 
@@ -75,10 +76,46 @@ function App() {
     window.location.assign('/ecommerce-project/');
   }
 
+
+
+  async function addToCart(title, id) {    
+
+    const user = JSON.parse(localStorage.getItem("auth"));
+
+    if (user === null || user === undefined) {
+      alert("You are not authenticated.")
+      return 0;
+      
+    }
+    
+    const data = {owner: user['id'], 
+    book_name: title, 
+    book_id: id};
+    console.log(data);
+    const response = await api.post('cart/', data, 
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
+      },
+    });
+    const status = await response.status;
+    const data2 = await response.data;
+    console.log(data2);
+    if (status === 201) {
+      alert("the book is added");
+      
+      
+    } 
+    
+  }
+  
   async function buy() {
 
     const data = JSON.parse(sessionStorage.getItem("bought"));
 
+    console.log(data);
     const response = await api.post('boughts/', {
       owner: data['owner'], 
       book_name: data['title'], 
@@ -96,13 +133,24 @@ function App() {
   }
 
 
-  async function checkOut(title, id) {
-    const user = JSON.parse(localStorage.getItem("auth"));
-    console.log(user);
-    sessionStorage.setItem("bought", JSON.stringify({owner: user['id'],
-                                                     title: title,
-                                                    id: id}));
 
+  async function checkOut(title, id) {
+
+    const user = JSON.parse(localStorage.getItem("auth"));
+
+    if (user === null || user === undefined) {
+      alert("You are not authenticated.");
+      return 0;
+    }
+
+
+    // console.log(typeof user);
+    sessionStorage.setItem("bought", JSON.stringify({owner: user['id'], title: title, id: id}));
+
+     
+    ;
+
+    console.log(sessionStorage.getItem("bought"));
 //
   }
 
@@ -111,7 +159,7 @@ function App() {
     <>
       <Header handleSearch={handleSearch} removeUser={removeUser} csrftoken={csrftoken} />
       <Routes>
-          <Route path='ecommerce-project/' element={<Home />} />
+          <Route path='ecommerce-project/' element={<Home setId={setId} />} />
           <Route path='ecommerce-project/about/' element={<About />} />
           <Route path='ecommerce-project/signup/' element={<SignUp addUser={addUser} csrftoken={csrftoken} />} />
           <Route path='ecommerce-project/login/' element={<LogIn addUser={addUser} csrftoken={csrftoken} />} />
@@ -129,9 +177,10 @@ function App() {
                                                                     setTitle={setTitle} 
                                                                     description={description}
                                                                     checkOut={checkOut}
+                                                                    addToCart={addToCart}
                                                                     csrftoken={csrftoken} />} 
                                                                      />
-
+          <Route path='ecommerce-project/bs-:name/' element={<BS addToCart={addToCart} id={id} checkOut={checkOut} csrftoken={csrftoken} />} />
           <Route path='ecommerce-project/success/' element={<Success buy={buy} />} />
           <Route path='*' element={<NotFound />} />
       </Routes>

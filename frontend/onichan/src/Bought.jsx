@@ -4,9 +4,13 @@ import api from './apis/api';
 const Bought = () => {
 
   const [books, setBooks] = useState([])
+  const user = JSON.parse(localStorage.getItem("auth"));
 
   async function boughts() {
-    const response = await api.get("boughts/");
+    if (user === null || user === undefined) {
+      return 0;
+    }
+    const response = await api.get(`boughts/${user['id']}/`);
     const status = await response.status;
     if (status === 200) {
       const data = await response.data;

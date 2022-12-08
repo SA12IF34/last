@@ -91,13 +91,13 @@ class CartSerializer(serializers.Serializer):
 
 
  
-    owner = serializers.CharField(write_only=True)
+    owner = serializers.DecimalField(max_digits=8, decimal_places=8 ,write_only=True)
     book_name = serializers.CharField(write_only=True)
     book_id = serializers.CharField(write_only=True)
 
     def create(self, data):
 
-        user = User.objects.get(username=data['owner'])
+        user = User.objects.get(id=data['owner'])
 
         newBook = Cart(book_name=data['book_name'], book_id=data['book_id'])
 

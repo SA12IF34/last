@@ -19,7 +19,6 @@ const LogIn = ({addUser, csrftoken}) => {
     if (status === 200) {
         const data = await response.data;
         addUser(data.id, data.username, data.email);
-        // console.log(data);
     }
   }
 

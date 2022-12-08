@@ -12,5 +12,6 @@ urlpatterns = [
     path('books/', books),
     path('books/<str:book>for<int:owner>/', book),
     path('boughts/', addtoboughts),
+    path('boughts/<int:owner>/', getBoughts),
     path('checkoutchan/', checkout_session)
 ]   

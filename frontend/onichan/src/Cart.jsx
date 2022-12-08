@@ -22,7 +22,7 @@ const Cart = ({checkOut, csrftoken}) => {
   }, [])
 
 
-  async function removeBook(name, id) {
+  async function removeBook(name, id, reload) {
     const response = await await api.delete(`books/${name}for${id}/`, {
       headers: {
         'Accept': 'application/json',
@@ -34,7 +34,11 @@ const Cart = ({checkOut, csrftoken}) => {
     const status = await response.status;
 
     if (status === 204) {
-      window.location.reload();
+      if (reload) {
+        window.location.reload();
+      }else {
+        console.log("good");
+      }
     }
 
   }
@@ -49,14 +53,18 @@ const Cart = ({checkOut, csrftoken}) => {
               <h3>{book.book_name}</h3>
               <div>
                 <form style={{display: "inline"}} action="/apis/checkoutchan/" method="POST">
-                  <button onClick={() => {checkOut(book.book_name, book.book_id)}} className='One'>Check Out</button>
+                  <input type="hidden" name="csrfmiddlewaretoken" value={csrftoken} />
+                  <button onClick={() => {
+                    checkOut(book.book_name, book.book_id);
+                    removeBook(book.book_name, book.owner, false);
+                  }} className='One'>Check Out</button>
                 </form>
-                <button onClick={() => {removeBook(book.book_name, book.owner)}} className='Two'>Remove</button>
+                <button onClick={() => {removeBook(book.book_name, book.owner, true)}} className='Two'>Remove</button>
               </div>
             </div>
           </li>
         )
-      })) : (<><h2 style={{margin: "20px"}}>There is no any books in the cart...</h2></>)}
+      })) : (<><h2 style={{margin: "20px"}}>There are no books in the cart...</h2></>)}
       </ul>
     </section>
   )
