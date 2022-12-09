@@ -6,6 +6,8 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name="shit/dist/index.html")),
+    path('skills-frontend/', TemplateView.as_view(template_name="templates/one.html")),
+    path('skills-backend/', TemplateView.as_view(template_name="templates/two.html")),
     path('saifapis/', include('saifapp.urls')),
     path('apis/', include("api.urls")),
     path('apis2/', include("APIs.urls")),

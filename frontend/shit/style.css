@@ -67,6 +67,10 @@ h3 {
   margin-top:20px ;
 }
 
+#Third {
+  width: 100%;
+}
+
 .Fourth>div {
   text-align: center;
 }
