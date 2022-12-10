@@ -53,6 +53,69 @@ function App() {
   csrftoken = getCookie('csrftoken');
 
 
+  function alertChan(title, id, submit) {
+
+    window.scrollTo(0, 0);
+    
+    let container = document.createElement("div");
+    let number = document.createElement("h2");
+    let btn1 = document.createElement("button");
+    let btn2 = document.createElement("button");
+    let alert = document.createElement("h2");
+
+    container.id = "container";
+
+    btn1.innerText = "Copy";
+    btn2.innerText = "Cancel";
+
+    btn1.style.cssText = "position: absolute; bottom: 25px; right: 120px;"
+    btn2.style.cssText = "position: absolute; bottom: 25px; right: 30px;"
+
+    alert.innerText = "Use The Folowing Number in order to make the operation succeeding :";
+    number.innerText = 4242424242424242;
+    alert.style.cssText = "margin: 25px; font-size: 1.2em";
+    number.style.cssText = "position: absolute; top: 50%; transform: translateY(-50%); left: 25px;";
+    
+
+    container.style.cssText = `
+      width: 80%;
+      max-width: 500px;
+      min-width: 350px;
+      height: 260px;
+      background-color: white;
+      border: 1px solid black;
+      border-radius: 12px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 973;
+    `;
+
+    container.append(alert, number, btn1, btn2);
+
+    let root = document.getElementById("root");
+    root.classList.add("rootAlert");
+    
+    document.body.appendChild(container);
+
+    btn1.onclick = () => {
+      root.classList.remove("rootAlert");
+      window.navigator.clipboard.writeText("4242424242424242");
+      container.remove();
+      checkOut(title, id);
+      submit.click();
+      return 'copy';
+    }
+
+    btn2.onclick = () => {
+      root.classList.remove("rootAlert");
+      container.remove();
+      return 0;
+    }
+
+  }
+
 
   async function handleSearch(input) {
     try {
@@ -132,7 +195,17 @@ function App() {
     }
   }
 
-
+  async function go() {
+    await api.post("checkoutchan/", '', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken,
+        'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Credentials':true
+      },
+    });
+  }
 
   async function checkOut(title, id) {
 
@@ -150,8 +223,7 @@ function App() {
      
     ;
 
-    console.log(sessionStorage.getItem("bought"));
-//
+
   }
 
 
@@ -163,7 +235,7 @@ function App() {
           <Route path='ecommerce-project/about/' element={<About />} />
           <Route path='ecommerce-project/signup/' element={<SignUp addUser={addUser} csrftoken={csrftoken} />} />
           <Route path='ecommerce-project/login/' element={<LogIn addUser={addUser} csrftoken={csrftoken} />} />
-          <Route path='ecommerce-project/cart/' element={<Cart checkOut={checkOut} csrftoken={csrftoken} />} />
+          <Route path='ecommerce-project/cart/' element={<Cart checkOut={checkOut} csrftoken={csrftoken} alertChan={alertChan} />} />
           <Route path='ecommerce-project/bought/' element={<Bought />} />
           <Route path='ecommerce-project/search-:name' element={<Books 
                                                 books={books} 
@@ -178,9 +250,10 @@ function App() {
                                                                     description={description}
                                                                     checkOut={checkOut}
                                                                     addToCart={addToCart}
-                                                                    csrftoken={csrftoken} />} 
+                                                                    csrftoken={csrftoken}
+                                                                    alertChan={alertChan} />} 
                                                                      />
-          <Route path='ecommerce-project/bs-:name/' element={<BS addToCart={addToCart} id={id} checkOut={checkOut} csrftoken={csrftoken} />} />
+          <Route path='ecommerce-project/bs-:name/' element={<BS addToCart={addToCart} id={id} checkOut={checkOut} csrftoken={csrftoken} alertChan={alertChan} />} />
           <Route path='ecommerce-project/success/' element={<Success buy={buy} />} />
           <Route path='*' element={<NotFound />} />
       </Routes>
@@ -188,4 +261,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

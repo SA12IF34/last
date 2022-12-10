@@ -6,7 +6,7 @@ import api from './apis/api';
 
 // https://www.googleapis.com/books/v1/volumes/${id}?key=AIzaSyDC_qS2Su7sFIxffrkpvXJ52bFkUOoLdzQ
 
-const BS = ({id, addToCart, checkOut, csrftoken}) => {
+const BS = ({id, addToCart, checkOut, csrftoken, alertChan}) => {
 
   const [title, setTitle] = useState();
   
@@ -50,16 +50,16 @@ const BS = ({id, addToCart, checkOut, csrftoken}) => {
             <h3>Add to Cart</h3>
           </button>
 
-          <form  action={user ?  "/apis/checkoutchan/" : (onsubmit=(e)=>{e.preventDefault()} )} onSubmit={(e) => {
-            console.log(typeof user);
-            checkOut(title, id);
-            
-          }} method='POST'>
+          <form action={user ?  "/apis/checkoutchan/" : (onsubmit=(e)=>{e.preventDefault()} )}  method='POST'>
             <input type="hidden" name="csrfmiddlewaretoken" value={csrftoken} />
-            <button  className='Btn' type="submit">
+            <input type="submit" style={{display: 'none'}} className="SubmitChan" />
+          </form>
+          <button onClick={() => {
+            let submit = document.querySelector(".SubmitChan");
+             alertChan(title, id, submit)
+            }}  className='Btn' >
                 <h3>Checkout</h3>
             </button>
-          </form>
         </div>
     </section>
   )

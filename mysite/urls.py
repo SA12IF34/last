@@ -11,6 +11,7 @@ urlpatterns = [
     path('saifapis/', include('saifapp.urls')),
     path('apis/', include("api.urls")),
     path('apis2/', include("APIs.urls")),
+    path('blog/', TemplateView.as_view(template_name="blog/dist/index.html")),
     path('ecommerce-project/', TemplateView.as_view(template_name="onichan/dist/index.html")),
     path('ecommerce-project/success/', TemplateView.as_view(template_name="onichan/dist/index.html"))
 
@@ -20,4 +21,4 @@ urlpatterns = [
 react_routes = getattr(settings, 'REACT_ROUTES', [])
 
 for route in react_routes:
-    urlpatterns.append(path(f'ecommerce-project/{route}/', TemplateView.as_view(template_name="onichan/dist/index.html")))
+    urlpatterns.append(path(f'ecommerce-project/{route}/', TemplateView.as_view(template_name="onichan/dist/index.html"))) 

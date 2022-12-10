@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from './apis/api';
 
-const Cart = ({checkOut, csrftoken}) => {
+const Cart = ({checkOut, csrftoken, alertChan}) => {
 
   const [books, setBooks] = useState([])
 
@@ -54,11 +54,14 @@ const Cart = ({checkOut, csrftoken}) => {
               <div>
                 <form style={{display: "inline"}} action="/apis/checkoutchan/" method="POST">
                   <input type="hidden" name="csrfmiddlewaretoken" value={csrftoken} />
-                  <button onClick={() => {
-                    checkOut(book.book_name, book.book_id);
-                    removeBook(book.book_name, book.owner, false);
-                  }} className='One'>Check Out</button>
+                  <input type="submit" style={{display: 'none'}} className='SubmitChan' />
                 </form>
+                <button onClick={() => {
+                    let submit = document.querySelector('.SubmitChan');
+                    removeBook(book.book_name, book.owner, false);
+                    alertChan(book.book_name, book.book_id, submit);
+                    
+                  }} className='One'>Check Out</button>
                 <button onClick={() => {removeBook(book.book_name, book.owner, true)}} className='Two'>Remove</button>
               </div>
             </div>

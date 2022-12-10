@@ -11,7 +11,6 @@ import dw from './imgs/dw.jpg';
 
 const Home = ({setId}) => {
 
-
   useEffect(() => {
     const list = document.querySelectorAll(".Selling>div ul li div");
     list.forEach(ele => {
@@ -97,6 +96,5 @@ const Home = ({setId}) => {
     </section>
   )
 }
-
 
 export default Home;

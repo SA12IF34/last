@@ -7,13 +7,16 @@
 
 body {
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-image: url("./three.jpg");
+  background-size:contain;
 }
 
-:root {
+#root {
   width: 80%;
   height: max-content;
   margin: auto;
   padding-top: 5%;
+
 }
 
 .flex-center {

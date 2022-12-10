@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from './apis/api';
 
-const Book = ({id, checkOut, addToCart, csrftoken}) => {
+const Book = ({id, checkOut, addToCart, csrftoken, alertChan}) => {
 
   const [title, setTitle] = useState();
   
@@ -20,6 +20,8 @@ const Book = ({id, checkOut, addToCart, csrftoken}) => {
 
   const {name} = useParams();
   const user = JSON.parse(localStorage.getItem("auth"));
+
+  
 
 
   return (
@@ -39,15 +41,16 @@ const Book = ({id, checkOut, addToCart, csrftoken}) => {
           } className='Btn'>
             <h3>Add to Cart</h3>
           </button>
-          <form action={user ?  "/apis/checkoutchan/" : (onsubmit=(e)=>{e.preventDefault()} )} onSubmit={(e) => {
-            console.log(typeof user);
-            checkOut(title, id);
-          }} method='POST'>
+          <form action={user ?  "/apis/checkoutchan/" : (onsubmit=(e)=>{e.preventDefault()} )}  method='POST'>
             <input type="hidden" name="csrfmiddlewaretoken" value={csrftoken} />
-            <button  className='Btn' type="submit">
+            <input type="submit" style={{display: 'none'}} className="SubmitChan" />
+          </form>
+          <button onClick={() => {
+            let submit = document.querySelector(".SubmitChan");
+             alertChan(title, id, submit)
+            }}  className='Btn' >
                 <h3>Checkout</h3>
             </button>
-          </form>
         </div>
 
     </section>
