@@ -19,21 +19,7 @@ const interactionManager = new InteractionManager(
   renderer.domElement
 );
 
-// const python = new URL("./python.glb", import.meta.url);
-// const html = new URL("./html.glb", import.meta.url);
-// const css = new URL("./css.glb", import.meta.url);
-// const javaScript = new URL("./javaScript.glb", import.meta.url);
-// const react = new URL("./react.glb", import.meta.url);
-// const django = new URL("./django.glb", import.meta.url);
-// const drf = new URL("./drf.glb", import.meta.url);
-// const postgres = new URL("./postgres.glb", import.meta.url);
-// const numpy = new URL("./numpy.glb", import.meta.url);
-// const pandas = new URL("./pandas.glb", import.meta.url);
-// const plot = new URL("./plot.glb", import.meta.url);
-// const selenium = new URL("./selenuim.glb", import.meta.url);
-// const git = new URL("./git.glb", import.meta.url);
-// const c = new URL("./c.glb", import.meta.url);
-// const cpp = new URL("./cpp.glb", import.meta.url);
+
 
 const arrchan = [];
 var resized = false;
@@ -100,13 +86,14 @@ renderer.setSize(container.parentElement.offsetWidth, 500, true);
 renderer.setClearColor(0x000000, 0);
 
 
-const light = new THREE.SpotLight(0xffffff, 0.8);
+
+const light = new THREE.AmbientLight(0xffffff, 1)
 const light1 = new THREE.SpotLight(0xffffff, 0.8)
 const light2 = new THREE.SpotLight(0xffffff, 0.8)
-light1.position.set(20, 0, 35);
+light1.position.set(0, -18, 35);
 light1.lookAt(new THREE.Vector3(0, 0, 0));
 
-light2.position.set(-20, 0, 35);
+light2.position.set(0, 18, 35);
 light2.lookAt(new THREE.Vector3(0, 0, 0));
 
 scene.add(light1, light2)

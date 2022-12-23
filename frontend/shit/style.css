@@ -12,7 +12,7 @@ body {
 }
 
 #root {
-  width: 80%;
+  width: 75%;
   height: max-content;
   margin: auto;
   padding-top: 5%;
@@ -28,8 +28,12 @@ body {
 section {
   margin-top: 100px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
+}
+
+#Third h2, .Fourth h2 {
+  margin-left: 20px;
 }
 
 #First .Justification {
@@ -77,16 +81,17 @@ h3 {
 }
 
 .Fourth>div {
-  text-align: center;
+  width: 100%;
 }
 
 .Projects {
-  width: 100%;
+  width: 80%;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
-  flex-basis: auto;
-  margin-top: 30px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .Projects div {
