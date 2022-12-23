@@ -32,10 +32,6 @@ section {
   flex-wrap: wrap;
 }
 
-#Third h2, .Fourth h2 {
-  margin-left: 20px;
-}
-
 #First .Justification {
   align-self: center;
   translate: 0 -40%;
