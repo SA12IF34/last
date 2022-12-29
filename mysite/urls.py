@@ -13,7 +13,8 @@ urlpatterns = [
     path('apis2/', include("APIs.urls")),
     path('blog/', TemplateView.as_view(template_name="blog/dist/index.html")),
     path('ecommerce-project/', TemplateView.as_view(template_name="onichan/dist/index.html")),
-    path('ecommerce-project/success/', TemplateView.as_view(template_name="onichan/dist/index.html"))
+    path('ecommerce-project/success/', TemplateView.as_view(template_name="onichan/dist/index.html")),
+    path('portfolio/', TemplateView.as_view(template_name="portfolio/dist/index.html")),
 
 ]
 

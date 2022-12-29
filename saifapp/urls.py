@@ -10,4 +10,5 @@ urlpatterns = [
     path('imgs/', ImgsAPI.as_view()),
     path('imgs/<int:article>/', ImgAPI.as_view()),
     path('subscribe/', SubscribeAPI.as_view()),
+    path('send-message/', Message.as_view()),
 ]  

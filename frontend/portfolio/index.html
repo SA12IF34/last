@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/9b81eb347f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="root">
+        <div id="parent" class="parent absolute-center">
+            <div class="face absolute-center one">
+                <div class="face-child">
+                    <p style="max-width: 950px; font-size: 1.6em; font-weight:bold; line-height: 1.5;">
+                        a software engineer with passion for bulding web applications that have
+                        The scalability, security, responsivity, fast and seamless performance.
+                    </p>
+                </div>
+            </div>
+            <div class="face absolute-center three">
+                <h1>Skills :</h1>
+                <div class="skills-container">
+                    <!-- hard -->
+                    <div class="front">
+                        <h2>FrontEnd Skills :</h2>
+                        <div class="skills">
+                            <ul>
+                                <li>HTML</li>
+                                <li>CSS</li>
+                                <li>JavaScript</li>
+                                <li>ReactJs</li>
+                                <li>NextJs</li>
+                                <li>ThreeJs</li>
+                                <li>API Integration</li>
+                            </ul>
+                            <div class="three-d">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <h2>BackEnd Skills :</h2>
+                        <div class="skills">
+                            <ul>
+                                <li>Python</li>
+                                <li>Django</li>
+                                <li>Django<br>rest framework</li>
+                                <li>Sqlite</li>
+                                <li>API development</li>
+                            </ul>                                    
+                            <div class="three-d">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- other -->
+                    <div class="other">
+                        <h2>Other Skills :</h2>
+                        <div class="skills">
+                            <ul>
+                                <li>Selenium</li>
+                                <li>Numpy</li>
+                                <li>Pandas</li>
+                                <li>Matplotlib</li>
+                                <li>C++</li>
+                                <li>Git & GitHub</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- soft -->
+                    <div class="soft">   
+                        <h2>SoftSkills :</h2>
+                        <div class="skills">
+                            <p style="width: fit-content; height: fit-content;">
+                                My soft skills are critical and analytical thinking, Time management, Work Ethic, teamWork, problem solving, and Work-life balance.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="face absolute-center two">
+                <h1>Projects :</h1>
+                <div class="projects">
+                    <div class="project blog">
+                        <div class="the-work">
+                            <img class="project-img" src="./blog.png" alt="work">
+                        </div>
+                        <div class="desc">
+                            <h2>A Blog</h2>
+                            <p>
+                                
+                                The Blog is a project that I have built 
+                                to be a Portfolio project, and to be my own blog.
+                            </p>
+                            <a href="/blog/">
+                                <button onclick="() => {console.log(``)}">
+                                    <h3>Visit It</h3>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project ecommerce">
+                        <div class="the-work">
+                            <img class="project-img" src="./ecommerce.png" alt="work">
+                        </div>
+                        <div class="desc">
+                            <h2>E-commerce Project</h2>
+                            <p>
+                                
+                                The E-commerce project is a project I have built to be a show case of my skills and abilities.
+                            </p>
+                            <a href="/ecommerce-project/">
+                                <button>
+                                    <h3>Visit It</h3>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="face absolute-center four">
+                <div class="contact">
+                    <div class="info-form">
+                        <div>
+                            <h3>Phone : +962799562745</h3>
+                            <h3>E-mail : saifchan@mail.com</h3>
+                            <h3><a href="https://github.com/SA12IF34" target="_blank">GitHub Profile</a></h3>
+                        </div>
+                        <div>
+                            <h3>Send A Message :</h3>
+                            <form id="send-message">  
+                                <input type="text" id="name" placeholder="your name">
+                                <input type="email" name="email" id="email" placeholder="your email">
+                                <br>
+                                <input type="text" name="subject" id="subject" placeholder="subject">
+                                <br>
+                                <textarea name="body" id="message" id="body" cols="30" rows="10" placeholder="your message"></textarea>
+                                <br>
+                                <input type="submit" value="submit">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <button class="btnOne face-btn"><i class="fa-solid fa-chevron-right i-one"></i></button>
+    <button class="btnTwo face-btn"><i class="fa-solid fa-chevron-left i-two"></i></button>
+    <script type="module" src="main.js"></script>
+    <script type="module" src="threeD.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
+ 

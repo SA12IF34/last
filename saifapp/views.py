@@ -1,16 +1,12 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.status import *
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
+
 from .models import *
 from .serializers import *
+
 import requests
 
-
-sender_chan = "saifchan122@gmail.com"
-receiver_chan = "saifchan@mail.com"
-password_chan = "upciyzqynkywvcnx"
 
 
 
@@ -117,18 +113,41 @@ class SubscribeAPI(APIView) :
     def post(self, request):
         
         
-        message = Mail(
-            from_email=sender_chan,
-            to_emails=receiver_chan,
-            subject="Sub Request",
-            html_content=f'<strong>{request.data["name"]} wants to be superuser, this is his/her Email {request.data["email"]} Request Content : [{request.data["reasone"]}]</strong>'
-        )
-
-        
-        sg = SendGridAPIClient("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")
-        response = sg.send(message)
-        print(response.status_code)
+        requests.post(
+		"https://api.mailgun.net/v3/sandbox867139736e344d0497b3d9c63dd32ba7.mailgun.org/messages",
+		auth=("api", "c3d86e0b1474dc11a89edae57c9c6a14-c2efc90c-920bc955"),
+		data={"from": f"{request.data['name']} <{request.data['email']}>",
+			"to": "‪Saif Ayesh‬‏ <ayeshsaif367@gmail.com>",
+			"subject": f"subscribtion request for blog",
+			"text": f"{request.data['reasone']}"})
         
         
 
         return Response({"result": "request is sent"})
+
+
+class Message(APIView):
+
+    def get(self, request):
+        
+        return Response(data={"news": "nothing to see here"})
+    
+    def post(self, request):
+        
+        try:
+            requests.post(
+		"https://api.mailgun.net/v3/sandbox867139736e344d0497b3d9c63dd32ba7.mailgun.org/messages",
+		auth=("api", "c3d86e0b1474dc11a89edae57c9c6a14-c2efc90c-920bc955"),
+		data={"from": f"{request.data['name']} <{request.data['email']}>",
+			"to": "‪Saif Ayesh‬‏ <ayeshsaif367@gmail.com>",
+			"subject": f"{request.data['subject']}",
+			"text": f"{request.data['body']}"})
+
+            
+
+        except :
+            return Response(data = {"error": "some error occured"}, status=HTTP_400_BAD_REQUEST)
+
+            
+
+        return Response(data={"good": "email is sent"}, status=HTTP_200_OK) 
