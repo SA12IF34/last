@@ -7,7 +7,7 @@
     <title>Portfolio</title>
     
     <script src="https://kit.fontawesome.com/9b81eb347f.js" crossorigin="anonymous"></script>
-  <script type="module" crossorigin src="/assets/index.2992c7d4.js"></script>
+  <script type="module" crossorigin src="/assets/index.7c5ab1bd.js"></script>
   <link rel="stylesheet" href="/assets/index.572ae9a2.css">
 </head>
 <body>
@@ -133,14 +133,13 @@
                         </div>
                         <div>
                             <h3>Send A Message :</h3>
-                            <form id="send-message">  
-                                <input type="hidden" name="_captcha" value="false">
-                                <!-- <input type="hidden" name="_autoresponse" value="false"> -->
-                                <input type="hidden" name="_next" value="https://saifchan.site/portfolio/">
+                            <form action="https://api.web3forms.com/submit" method="POST" id="send-message">  
+                                <input type="hidden" name="access_key" value="04a82d54-7e70-469b-a2c7-9ce62c65bc71">
+                                <input type="hidden" name="redirect" value="https://saifchan.site/portfolio">
                                 <input type="text" id="name" placeholder="your name">
                                 <input type="email" name="email" id="email" placeholder="your email">
                                 <br>
-                                <input type="text" name="_subject" id="subject" placeholder="subject">
+                                <input type="text" name="subject" id="subject" placeholder="subject">
                                 <br>
                                 <textarea name="body" id="message" cols="30" rows="10" placeholder="your message"></textarea>
                                 <br>
@@ -155,7 +154,6 @@
     </div>
     <button class="btnOne face-btn"><i class="fa-solid fa-chevron-right i-one"></i></button>
     <button class="btnTwo face-btn"><i class="fa-solid fa-chevron-left i-two"></i></button>
-    
     
     
 </body>
