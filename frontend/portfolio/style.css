@@ -47,6 +47,7 @@ h1 {
     overflow: hidden;
     transform-style: preserve-3d;
     perspective: 900px;
+    position: absolute;
 }
 
 .parent {
