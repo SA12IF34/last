@@ -27,6 +27,8 @@ import api from './apis/api';
 
 function App() {
 
+  const KEY = "AIzaSyBPCWRxGs2oBtke0P4R8BrlvtGYWYs2pQw";
+
   const navigator = useNavigate();
   const [books, setBooks] = useState([]);
   const [id, setId] = useState();
@@ -120,7 +122,7 @@ function App() {
   async function handleSearch(input) {
     try {
       
-      const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${input}&maxResults=33&key=AIzaSyDC_qS2Su7sFIxffrkpvXJ52bFkUOoLdzQ`);
+      const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${input}&maxResults=33&key=${KEY}`);
       setBooks(response.data.items);
       navigator(`/ecommerce-project/search-${input}/`)
 
@@ -251,7 +253,8 @@ function App() {
                                                                     checkOut={checkOut}
                                                                     addToCart={addToCart}
                                                                     csrftoken={csrftoken}
-                                                                    alertChan={alertChan} />} 
+                                                                    alertChan={alertChan}
+                                                                    KEY={KEY} />} 
                                                                      />
           <Route path='ecommerce-project/bs-:name/' element={<BS addToCart={addToCart} id={id} checkOut={checkOut} csrftoken={csrftoken} alertChan={alertChan} />} />
           <Route path='ecommerce-project/success/' element={<Success buy={buy} />} />

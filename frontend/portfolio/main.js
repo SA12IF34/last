@@ -20,9 +20,7 @@ function maho() {
 
 maho();
 
-window.addEventListener('resize', () => {
-    maho();
-})
+
 
 function mouseDown(e) {
     e.target.parentElement.style.cssText = "opacity: 0.7";

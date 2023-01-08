@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from './apis/api';
 
-const Book = ({id, checkOut, addToCart, csrftoken, alertChan}) => {
+const Book = ({id, checkOut, addToCart, csrftoken, alertChan, KEY}) => {
 
   const [title, setTitle] = useState();
   
   useEffect(() => {
     async function getBook() {
-      const response = await api.get(`https://www.googleapis.com/books/v1/volumes/${id}?key=AIzaSyDC_qS2Su7sFIxffrkpvXJ52bFkUOoLdzQ`)
+      const response = await api.get(`https://www.googleapis.com/books/v1/volumes/${id}?key=${KEY}`)
       const data = await response.data;
       document.querySelector(".desc").innerHTML = data.volumeInfo.description;
       setTitle(data.volumeInfo.title);
