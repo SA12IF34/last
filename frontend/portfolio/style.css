@@ -84,6 +84,7 @@ h1 {
     background-color: var(--color3);
     overflow: scroll;
     overflow-x: hidden;
+    padding-bottom: 50px;
 }
 .three {
     background-color: var(--color2);
@@ -236,7 +237,7 @@ button i {
 .desc p {
     border: 1px solid #3f3f3f;
     width: 300px;
-    height: 100px;
+    min-height: 100px;
     padding: 5px;
     background-color: #ffedbc;
     margin: 12px;
